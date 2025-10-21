@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import BASE_URL from '../baseURL';
 import { Link, useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
@@ -9,7 +10,7 @@ const SignIn = () => {
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault(); 
-        const res = await fetch("http://localhost:5000/auth/signin", {
+        const res = await fetch(`${BASE_URL}/auth/signin`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

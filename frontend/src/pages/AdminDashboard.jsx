@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import BASE_URL from "../baseURL";
 import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
@@ -14,7 +15,7 @@ const AdminDashboard = () => {
   // ✅ Fetch all users
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await fetch("http://localhost:5000/admin/users");
+      const res = await fetch(`${BASE_URL}/admin/users`);
       const data = await res.json();
       setUsers(data);
     };
@@ -24,7 +25,7 @@ const AdminDashboard = () => {
   // ✅ Fetch notes for selected user
   const handleViewNotes = async (user) => {
     setLoading(true);
-    const res = await fetch(`http://localhost:5000/admin/notes/${user._id}`);
+    const res = await fetch(`${BASE_URL}/admin/notes/${user._id}`);
     const data = await res.json();
     setSelectedUser(user);
     setNotes(data);
@@ -33,7 +34,7 @@ const AdminDashboard = () => {
 
   // ✅ Restrict user for 1 day
   const handleRestrict = async (userId) => {
-    const res = await fetch(`http://localhost:5000/admin/restrict/${userId}`, {
+    const res = await fetch(`${BASE_URL}/admin/restrict/${userId}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ duration: 1 }),

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import BASE_URL from "../baseURL";
+
 import AddNote from "./AddNote";
 
 
@@ -11,7 +13,7 @@ const NotesList = ({searchQuery=""}) => {
 
   const fetchNotes = async () => {
     try {
-      const res = await fetch("http://localhost:5000/notes/", {
+      const res = await fetch(`${BASE_URL}/notes`, {
         method: "GET",
         credentials: "include",
       });
@@ -33,7 +35,7 @@ const NotesList = ({searchQuery=""}) => {
   // Add note handler
   const handleAddNote = async (noteData) => {
     try {
-      const res = await fetch("http://localhost:5000/notes/", {
+      const res = await fetch(`${BASE_URL}/notes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -56,7 +58,7 @@ const NotesList = ({searchQuery=""}) => {
   const handleEditNote = async (noteData) => {
     if (editNote) {
       try {
-        const res = await fetch(`http://localhost:5000/notes/${editNote._id}`, {
+        const res = await fetch(`${BASE_URL}/notes/${editNote._id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -91,7 +93,7 @@ const NotesList = ({searchQuery=""}) => {
   const handleDeleteClick = async (note) => {
     if (window.confirm("Are you sure you want to delete this note?")) {
       try {
-        const res = await fetch(`http://localhost:5000/notes/${note._id}`, {
+        const res = await fetch(`${BASE_URL}/notes/${note._id}`, {
           method: "DELETE",
           credentials: "include",
         });
