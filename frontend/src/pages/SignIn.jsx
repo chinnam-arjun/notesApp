@@ -3,6 +3,8 @@ import BASE_URL from '../baseURL';
 import { Link, useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
+    console.log(import.meta.env);
+console.log(import.meta.env.VITE_API_URL);
     const [data, setData] = useState({
         email: "",
         password: ""

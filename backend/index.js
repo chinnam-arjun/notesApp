@@ -18,7 +18,7 @@ app.use(express.json());
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 app.use(cors({
-    origin : "http://localhost:5173",
+    origin : 'http://98.88.250.4',
     credentials: true
 }));
 app.use(bodyparser.json());
@@ -49,6 +49,6 @@ app.use('/auth',userRoutes);
 app.use('/notes',noteRoutes);
 app.use('/admin',adminRoutes)
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0" , () => {
     console.log(`Server is running on port ${PORT}`);
 });
