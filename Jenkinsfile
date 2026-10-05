@@ -1,8 +1,8 @@
 pipelie{
     agent none
     options {
-        skipDefaultCheckout(),
-        parallelAlwaysFailFast(true),
+        skipDefaultCheckout()
+        parallelAlwaysFailFast(true)
         
     }
     parameters {
