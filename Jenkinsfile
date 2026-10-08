@@ -49,7 +49,7 @@ pipeline {
                 echo 'Running test suite inside the container...'
                 // CRITICAL: Replace 'app-container-name' with your actual service name from docker-compose.yml
                 // Replace 'npm test' with your actual test command (e.g., pytest, mvn test)
-                sh 'docker compose exec -T app-container-name npm test' || true 
+                sh 'docker compose exec -T app-container-name npm test || true' 
             }
             post {
                 always {
