@@ -67,11 +67,16 @@ pipeline {
             steps {
                 echo "Deploying version ${IMAGE_VERSION} to Production..."
                 
-                // Securely logging in and pushing the image using Jenkins Credentials
-                // Replace 'docker-hub-credentials-id' with your actual Jenkins credential ID
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh "echo \$DOCKER_PASS | docker login -u \$DOCKER_USER --password-stdin"
-                    sh "docker push ${REGISTRY_USER}/myapp:${IMAGE_VERSION}"
+                    
+                    // Tag and push backend
+                    sh "docker tag notes-app-pipeline-backend:latest ${REGISTRY_USER}/notes-backend:${IMAGE_VERSION}"
+                    sh "docker push ${REGISTRY_USER}/notes-backend:${IMAGE_VERSION}"
+                    
+                    // Tag and push frontend
+                    sh "docker tag notes-app-pipeline-frontend:latest ${REGISTRY_USER}/notes-frontend:${IMAGE_VERSION}"
+                    sh "docker push ${REGISTRY_USER}/notes-frontend:${IMAGE_VERSION}"
                 }
             }
         }
